@@ -22,6 +22,28 @@ class TableController: UITableViewController {
     }
     
   
+    @IBAction func addTask(_ sender: UIBarButtonItem) {
+       // Setting up alert controller
+        let alertController = UIAlertController(title: "Add Task", message: nil, preferredStyle: .alert)
+        
+        // Set up actions
+        let addAction = UIAlertAction(title: "Add", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // Add text field
+        alertController.addTextField {
+            textField in
+            textField.placeholder = "Enter a new task"
+            
+        }
+        
+        // Add actions
+        alertController.addAction(addAction)
+        alertController.addAction(cancelAction)
+        
+        // Present
+        present(alertController, animated: true)
+    }
     
 }
 
@@ -39,6 +61,7 @@ extension TableController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return taskStore.tasks.count
