@@ -22,7 +22,22 @@ class TableController: UITableViewController {
         let alertController = UIAlertController(title: "Add Task", message: nil, preferredStyle: .alert)
         
         // Set up actions
-        let addAction = UIAlertAction(title: "Add", style: .default, handler: nil)
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+            // Grab text field text
+            guard let name = alertController.textFields?.first?.text else { return }
+            
+            // Create a task
+            let newTask = Task(name: name)
+            
+            // Add task
+            self.taskStore.add(newTask, at: 0)
+            
+            // Reload data in the table view
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .fade)
+            
+            
+        }
         addAction.isEnabled = false
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
@@ -65,11 +80,6 @@ extension TableController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
-    }
-    
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return taskStore.tasks.count
     }
@@ -77,10 +87,19 @@ extension TableController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskStore.tasks[section].count
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = taskStore.tasks[indexPath.section][indexPath.row].name
         return cell
     }
+}
+
+// MARK: - Delegate
+extension TableController {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
 }
 
