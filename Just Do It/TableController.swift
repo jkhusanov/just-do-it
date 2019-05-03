@@ -23,12 +23,13 @@ class TableController: UITableViewController {
         
         // Set up actions
         let addAction = UIAlertAction(title: "Add", style: .default, handler: nil)
+        addAction.isEnabled = false
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         // Add text field
-        alertController.addTextField {
-            textField in
+        alertController.addTextField { textField in
             textField.placeholder = "Enter a new task"
+            textField.addTarget(self, action: #selector(self.handleTextChanged), for: .editingChanged)
             
         }
         
@@ -40,6 +41,17 @@ class TableController: UITableViewController {
         present(alertController, animated: true)
     }
     
+    @objc private func handleTextChanged(_ sender: UITextField) {
+        // Grab the alert controller and add action
+        guard let alertController = presentedViewController as? UIAlertController,
+             let addAction = alertController.actions.first,
+            let text = sender.text
+            else {
+                return
+        }
+        // Enable or disable add action based on if text is empty or contains only whitespace
+        addAction.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+    }
 }
 
 // MARK: - DataSource
