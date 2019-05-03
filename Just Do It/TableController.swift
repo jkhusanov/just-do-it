@@ -10,15 +10,10 @@ import UIKit
 
 class TableController: UITableViewController {
     
-    var taskStore = TaskStore()
+    var taskStore: TaskStore!
     
     override func viewDidLoad() {
         super.viewDidLoad() // calls tableViewController's viewDidLoad method
-        
-        let uncompletedTasks = [Task(name: "Buy meat"), Task(name: "Buy bread"), Task(name: "Cook food")]
-        let completedTasks = [Task(name: "Do homework")]
-        
-        taskStore.tasks = [uncompletedTasks, completedTasks]
     }
     
   
