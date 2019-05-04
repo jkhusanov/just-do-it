@@ -17,7 +17,7 @@ class TaskStore {
     }
     
     
-    func removeTask(at index: Int, isDone: Bool = false) -> Task {
+   @discardableResult func removeTask(at index: Int, isDone: Bool = false) -> Task {
         let status = isDone ? 1 : 0
         return tasks[status].remove(at: index)
     }

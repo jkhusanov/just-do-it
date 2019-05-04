@@ -109,6 +109,57 @@ extension TableController {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = UIColor.white
     }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, source, completionHandler) in
+            
+            // Determine if a task is done
+            let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone
+            
+            // Remove a task from the appropiate array
+            self.taskStore.removeTask(at: indexPath.row, isDone: isDone)
+            
+            // Reload table view
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // Indicate that the actions is performed
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = UIColor(rgb: 0xff2e63)
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        
+       
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { (action, sourceView, completionHandler) in
+            
+            // Toggle that a task is done
+            self.taskStore.tasks[0][indexPath.row].isDone = true
+            
+            // Remove the task from the array containing todo tasks
+            let doneTask = self.taskStore.removeTask(at: indexPath.row)
+            
+            // Reload table view for the todo section
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // Add a task from the array containing done tasks
+            self.taskStore.add(doneTask, at: 0, isDone: true)
+            
+            // Reload table view for the done section
+            tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            
+            // Action is performed
+            completionHandler(true)
+        }
+        doneAction.backgroundColor = UIColor(rgb: 0x00b8a9)
+        
+        return indexPath.section == 0 ? UISwipeActionsConfiguration(actions: [doneAction]) : nil
+    }
 }
 
 
