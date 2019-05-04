@@ -22,6 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Following Dependecy Injection Pattern
+        
+        // Initialize task store
+        let taskStore = TaskStore()
+    
+        // Grab the TableController
+        let tableController = window?.rootViewController?.children.first as? TableController
+        
+        // Set the task store accordingly
+        tableController?.taskStore = taskStore
+        
         return true
     }
 
