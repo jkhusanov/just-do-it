@@ -115,7 +115,7 @@ extension TableController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, source, completionHandler) in
             
             // Determine if a task is done
-            let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone
+            guard let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone else {return}
             
             // Remove a task from the appropiate array
             self.taskStore.removeTask(at: indexPath.row, isDone: isDone)
