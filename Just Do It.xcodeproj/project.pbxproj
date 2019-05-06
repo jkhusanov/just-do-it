@@ -14,6 +14,7 @@
 		CC8E4FDB2279614D007C068B /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4FDA2279614D007C068B /* TableController.swift */; };
 		CC8E4FDD227970DA007C068B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4FDC227970DA007C068B /* Task.swift */; };
 		CC8E4FDF227971A4007C068B /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4FDE227971A4007C068B /* TaskStore.swift */; };
+		CC9B8792227F57FA00F68CA5 /* TasksUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B8791227F57FA00F68CA5 /* TasksUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CC8E4FDA2279614D007C068B /* TableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		CC8E4FDC227970DA007C068B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CC8E4FDE227971A4007C068B /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		CC9B8791227F57FA00F68CA5 /* TasksUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				CC8E4FDA2279614D007C068B /* TableController.swift */,
 				CC8E4FDC227970DA007C068B /* Task.swift */,
 				CC8E4FDE227971A4007C068B /* TaskStore.swift */,
+				CC9B8791227F57FA00F68CA5 /* TasksUtility.swift */,
 			);
 			path = "Just Do It";
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				CC8E4FDB2279614D007C068B /* TableController.swift in Sources */,
 				CC8E4FDD227970DA007C068B /* Task.swift in Sources */,
 				CC8E4FDF227971A4007C068B /* TaskStore.swift in Sources */,
+				CC9B8792227F57FA00F68CA5 /* TasksUtility.swift in Sources */,
 				CC8E4FC922796079007C068B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
