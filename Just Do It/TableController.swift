@@ -10,7 +10,15 @@ import UIKit
 
 class TableController: UITableViewController {
     
-    var taskStore: TaskStore!
+    var taskStore: TaskStore! {
+        didSet {
+            // Get the data
+            taskStore.tasks = TasksUtility.fetch() ?? [[Task](),[Task]()]
+            
+            // Reload the table
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad() // calls tableViewController's viewDidLoad method
@@ -31,6 +39,9 @@ class TableController: UITableViewController {
             
             // Add task
             self.taskStore.add(newTask, at: 0)
+            
+            // Save tasks
+            TasksUtility.save(self.taskStore.tasks)
             
             // Reload data in the table view
             let indexPath = IndexPath(row: 0, section: 0)
@@ -115,13 +126,14 @@ extension TableController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, source, completionHandler) in
             
             // Determine if a task is done
-            let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone
+            guard let isDone = self.taskStore.tasks[indexPath.section][indexPath.row].isDone else {return}
             
             // Remove a task from the appropiate array
             self.taskStore.removeTask(at: indexPath.row, isDone: isDone)
             
             // Reload table view
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
             
             // Indicate that the actions is performed
             completionHandler(true)
@@ -152,6 +164,7 @@ extension TableController {
             
             // Reload table view for the done section
             tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            
             
             // Action is performed
             completionHandler(true)
