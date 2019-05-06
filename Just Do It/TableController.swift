@@ -21,7 +21,8 @@ class TableController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad() // calls tableViewController's viewDidLoad method
+        // Calls tableViewController's viewDidLoad method
+        super.viewDidLoad()
     }
     
   
